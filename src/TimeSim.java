@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class TimeSim {
 
     private double remainingTime;
@@ -23,12 +26,14 @@ public class TimeSim {
         System.out.println("Height" + counter + " = " + h);
         double output = util.gpsClockCorrection(h, v)*timeQuantum;
         cumulator += output;
-        fileHandler.writeNextLine(cumulator + "");
+        BigDecimal bd = BigDecimal.valueOf(cumulator);
+        bd = bd.setScale(11, RoundingMode.HALF_UP);
+        fileHandler.writeNextLine(bd.doubleValue() + "");
         remainingTime -= timeQuantum;
         counter++;
       }
       fileHandler.flushWriter();
-
+      fileHandler.close();
     }
 
 }

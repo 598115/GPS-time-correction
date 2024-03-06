@@ -84,5 +84,14 @@ public void flushWriter() {
      e.printStackTrace();
    }
 }
+public void close() {
+   try {
+      hreader.close();
+      vreader.close();
+      writer.close();
+   } catch (IOException e) {
+     e.printStackTrace();
+   }
+}
 
 } 
